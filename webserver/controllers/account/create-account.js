@@ -17,9 +17,7 @@ async function validate(payload) {
 
 async function createAccount(req, res, next) {
     const data = req.body;
-    if (!data.location) {
-        res.status(400).send("location is needed")
-    }
+
     try {
         await validate(data);
     } catch (e) {

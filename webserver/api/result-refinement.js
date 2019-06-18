@@ -1,6 +1,8 @@
 'use strict';
 
 const dateFNS = require('date-fns')
+const clothesSelector = require('./clothes-selector');
+
 
 //TODO: Filter important things, maybe implement different filters
 function degreesToDir(deg) {
@@ -57,8 +59,10 @@ async function refineResult(rawData) {
       windSpeed: rawData.wind.speed,
       windDir: degreesToDir(rawData.wind.deg),
       rain: rawData.rain,
-      snow: rawData.snow
+      snow: rawData.snow,
+      clothes: undefined
     }
+    result.clothes = clothesSelector(result.temperature, result.weather)
     return result;
   }
   const data = rawData.list;
@@ -80,8 +84,10 @@ async function refineResult(rawData) {
       snow: time.snow,
       date: dateFNS.format(time.dt_txt, 'DD - MM - YYYY'),
       weekday: dateFNS.format(time.dt_txt, 'dddd'),
-      time: dateFNS.format(time.dt_txt, 'hh:mm')
+      time: dateFNS.format(time.dt_txt, 'hh:mm'),
+      clothes: undefined
     }
+    result.clothes = clothesSelector(result.temperature, result.weather)
     if (!curDay || curDay !== result.date) {
       curDay = result.date
       i++

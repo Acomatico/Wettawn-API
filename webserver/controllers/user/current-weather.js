@@ -13,6 +13,7 @@ async function currentWeather(req, res, next) {
 
     res.status(200).send(weather)
   } catch (e) {
+    console.log(e);
     res.status(404).send(e)
   }
 }
