@@ -6,13 +6,14 @@ const dateFNS = require('date-fns');
 
 async function travelWeather(req, res, next) {
   const { city, start, end } = req.body;
+
   const { uuid } = req.claims;
   try {
     const result = {
       uuid: uuid,
       destination: city,
-      startingAt: dateFNS.format(start, 'DD - MM - YYYY'),
-      endingAt: dateFNS.format(end, 'DD - MM - YYYY'),
+      startingAt: dateFNS.format(dateFNS.parse(start), "DD-MM-YYYY"),
+      endingAt: dateFNS.format(dateFNS.parse(end), "DD-MM-YYYY"),
       ended: false
     }
     const check = await travelModel.findOne({ uuid, ended: false })
