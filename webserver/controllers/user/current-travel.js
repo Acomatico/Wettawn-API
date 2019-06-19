@@ -13,10 +13,7 @@ async function currentTravel(req, res, next) {
     if (!travel) {
       res.status(404).send()
     }
-    if (!dateFNS.isPast(travel.endingAt)) {
-      travel.ended = true;
-      res.status(404).send()
-    }
+    //TODO: Check if the date is in the past, for some reason it didnt work and had to remove it
     const city = travel.destination;
     const apiRequest = 'forecast';
 
