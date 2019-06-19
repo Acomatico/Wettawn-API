@@ -27,7 +27,7 @@ async function init() {
         console.error(e);
         process.exit(1)
     }
-    const port = process.env.API_PORT
+    const port = process.env.PORT
 
     app.listen(port, () => {
         console.log(`Server should be running I guess on port ${port}`);
