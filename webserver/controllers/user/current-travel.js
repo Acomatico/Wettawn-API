@@ -7,7 +7,7 @@ const dateFNS = require('date-fns');
 async function currentTravel(req, res, next) {
   const { uuid } = req.claims
   try {
-    const travel = await travelModel.findOne({ uuid })
+    const travel = await travelModel.findOne({ User_uuid: uuid })
 
 
     if (!travel) {
