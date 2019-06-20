@@ -5,18 +5,17 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const travelSchema = new Schema({
-  uuid: {
+  User_uuid: {
     type: String,
-    unique: true
   },
   destination: {
     type: String
   },
   startingAt: {
-    type: Date
+    type: String
   },
   endingAt: {
-    type: Date
+    type: String
   },
   ended: {
     type: Boolean,

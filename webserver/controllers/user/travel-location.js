@@ -5,19 +5,22 @@ const dateFNS = require('date-fns')
 async function getTravelLocation(req, res, next) {
   const { uuid } = req.claims
   try {
-    const travel = await travelModel.findOne({ uuid })
-
+    const travel = await travelModel.findOne({ User_uuid: uuid })
 
     if (!travel) {
-      res.status(404).send()
-    }
-    if (!dateFNS.isPast(travel.endingAt)) {
-      travel.ended = true;
-      res.status(404).send()
+      res.status(400).send('no city found')
     }
     const city = travel.destination;
     const end = travel.endingAt;
     const start = travel.startingAt;
+
+    const endArray = end.split('-');
+    if (dateFNS.isPast(new Date(endArray[2], endArray[1] - 1, endArray[0]))) {
+      travel.ended = true;
+      res.status(400).send(e)
+    }
+    console.log()
+
     return res.status(200).send({ city, start, end })
   } catch (e) {
     console.log(e)
