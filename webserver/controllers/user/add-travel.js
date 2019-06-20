@@ -9,13 +9,13 @@ async function travelWeather(req, res, next) {
   const { city, start, end } = req.body;
 
   const { uuid } = req.claims;
-  //const startArray = start.split('-');
+  const startArray = start.split('-');
   const endArray = end.split('-')
   try {
     const result = {
       User_uuid: uuid,
       destination: city,
-      startingAt: dateFNS.format(new Date(), "DD-MM-YYYY"),
+      startingAt: dateFNS.format(new Date(startArray[0], startArray[1] - 1, startArray[2]), "DD-MM-YYYY"),
       endingAt: dateFNS.format(new Date(endArray[0], endArray[1] - 1, endArray[2]), "DD-MM-YYYY"),
       ended: false
     }

@@ -19,7 +19,6 @@ async function getTravelLocation(req, res, next) {
       travel.ended = true;
       res.status(400).send(e)
     }
-    console.log()
 
     return res.status(200).send({ city, start, end })
   } catch (e) {
