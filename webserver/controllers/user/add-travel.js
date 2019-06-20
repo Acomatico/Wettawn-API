@@ -23,7 +23,7 @@ async function travelWeather(req, res, next) {
     if (check) return res.status(401).send('You are already traveling!')
     console.log(result);
     await travelModel.create(result)
-    return res.status(201).send("all good lad")
+    return res.status(201).send()
   } catch (e) {
     console.log(e);
     return res.status(400).send(e)
