@@ -6,7 +6,7 @@ const dateFNS = require('date-fns');
 
 
 async function travelWeather(req, res, next) {
-  const { city, start, end } = req.body;
+  const { destination, start, end } = req.body;
 
   const { uuid } = req.claims;
   const startArray = start.split('-');
@@ -14,12 +14,12 @@ async function travelWeather(req, res, next) {
   try {
     const result = {
       User_uuid: uuid,
-      destination: city,
+      destination: destination,
       startingAt: dateFNS.format(new Date(startArray[0], startArray[1] - 1, startArray[2]), "DD-MM-YYYY"),
       endingAt: dateFNS.format(new Date(endArray[0], endArray[1] - 1, endArray[2]), "DD-MM-YYYY"),
       ended: false
     }
-    const check = await travelModel.findOne({ uuid, ended: false })
+    const check = await travelModel.findOne({ User_uuid: uuid, ended: false })
     if (check) return res.status(401).send('You are already traveling!')
     console.log(result);
     await travelModel.create(result)
