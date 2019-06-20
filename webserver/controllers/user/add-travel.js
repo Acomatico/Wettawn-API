@@ -4,7 +4,6 @@ const travelModel = require('../../../models/travel-model')
 const dateFNS = require('date-fns');
 
 
-
 async function travelWeather(req, res, next) {
   const { destination, start, end } = req.body;
 
@@ -13,7 +12,7 @@ async function travelWeather(req, res, next) {
   const endArray = end.split('-')
   try {
     const result = {
-      User_uuid: uuid,
+      user: uuid,
       destination: destination,
       startingAt: dateFNS.format(new Date(startArray[0], startArray[1] - 1, startArray[2]), "DD-MM-YYYY"),
       endingAt: dateFNS.format(new Date(endArray[0], endArray[1] - 1, endArray[2]), "DD-MM-YYYY"),

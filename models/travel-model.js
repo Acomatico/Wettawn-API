@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const travelSchema = new Schema({
-  User_uuid: {
+  user: {
     type: String,
   },
   destination: {
