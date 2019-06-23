@@ -10,7 +10,7 @@ const travelTo = require('../controllers/user/add-travel');
 const currentTravel = require('../controllers/user/current-travel');
 const currentLocation = require('../controllers/user/travel-location');
 
-router.post('/forecast', verifyJWT, weatherForecast);
+router.post('/forecast', weatherForecast);
 router.get('/weather', verifyJWT, currentWeather);
 router.get('/search/:city', verifyJWT, searchCity);
 router.post('/addtravel', verifyJWT, travelTo)

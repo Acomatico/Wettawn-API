@@ -66,10 +66,13 @@ async function refineResult(rawData) {
     return result;
   }
   const data = rawData.list;
-  const refinedData = [rawData.city.name];
+  const refinedData = {
+    days: [],
+  }
   let curDay; //This 2 variables are needed to make the data passed to the frontend be easier to work with, basically we make an array of days with an array of different times;
   let i = 0;
   data.forEach((time, j) => {
+    const date = dateFNS.format(time.dt_txt, 'DD - MM - YYYY');
     const result = {
       temperature: kelvinToCelsius(time.main.temp),
       minTemp: kelvinToCelsius(time.main.temp_min),
@@ -82,18 +85,21 @@ async function refineResult(rawData) {
       windDir: degreesToDir(time.wind.deg),
       rain: time.rain,
       snow: time.snow,
-      date: dateFNS.format(time.dt_txt, 'DD - MM - YYYY'),
-      weekday: dateFNS.format(time.dt_txt, 'dddd'),
       time: dateFNS.format(time.dt_txt, 'hh:mm'),
       clothes: undefined
     }
     result.clothes = clothesSelector(result.temperature, result.weather)
-    if (!curDay || curDay !== result.date) {
-      curDay = result.date
+    if (!curDay || curDay !== date) {
+      curDay = date
       i++
-      refinedData.push([])
+      refinedData.days.push({
+        weather: [],
+        date: dateFNS.format(time.dt_txt, 'DD - MM - YYYY'),
+        weekday: dateFNS.format(time.dt_txt, 'dddd')
+      })
     }
-    refinedData[i].push(result)
+    // console.log(refinedData)
+    refinedData.days[i - 1].weather.push(result)
   });
 
   // console.log(refinedData);
