@@ -24,6 +24,7 @@ async function currentWeather(req, res, next) {
 
     const weather = await weatherApi(city, apiRequest);
     weather.user = uuid;
+    weather.city = city;
     await weatherModel.create(weather)
     res.status(200).send(weather)
   } catch (e) {

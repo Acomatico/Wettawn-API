@@ -48,6 +48,7 @@ const WeatherSchema = new Schema({
   user: {
     type: String
   },
+  city: String,
   createdAt: {
     type: Date,
     default: Date.now

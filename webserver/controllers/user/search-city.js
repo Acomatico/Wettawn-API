@@ -20,6 +20,7 @@ async function searchCity(req, res, next) {
 
     const result = await weatherApi(city, apiRequest)
     result.user = uuid;
+    result.city = city;
     await weatherModel.create(result);
 
     res.status(200).send(result)
