@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const travelSchema = new Schema({
+  travelID: {
+    type: String
+  },
   user: {
     type: String,
   },

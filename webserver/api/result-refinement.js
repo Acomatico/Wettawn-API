@@ -58,9 +58,13 @@ async function refineResult(rawData) {
       cloudiness: rawData.clouds.all,
       windSpeed: rawData.wind.speed,
       windDir: degreesToDir(rawData.wind.deg),
-      rain: rawData.rain,
-      snow: rawData.snow,
       clothes: undefined
+    }
+    if (rawData.rain) {
+      result.rain = rawData.rain["3h"]
+    }
+    if (rawData.snow) {
+      result.snow = rawData.snow["3h"]
     }
     result.clothes = clothesSelector(result.temperature, result.weather)
     return result;
@@ -83,10 +87,14 @@ async function refineResult(rawData) {
       cloudiness: time.clouds.all,
       windSpeed: time.wind.speed,
       windDir: degreesToDir(time.wind.deg),
-      rain: time.rain,
-      snow: time.snow,
       time: dateFNS.format(time.dt_txt, 'hh:mm'),
       clothes: undefined
+    }
+    if (time.rain) {
+      result.rain = time.rain["3h"]
+    }
+    if (time.snow) {
+      result.snow = time.snow["3h"]
     }
     result.clothes = clothesSelector(result.temperature, result.weather)
     if (!curDay || curDay !== date) {
@@ -102,7 +110,7 @@ async function refineResult(rawData) {
     refinedData.days[i - 1].weather.push(result)
   });
 
-  // console.log(refinedData);
+  console.log(refinedData);
   return refinedData;
 }
 

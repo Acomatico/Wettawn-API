@@ -4,7 +4,7 @@ const travelModel = require('../../../models/travel-model');
 const weatherArrModel = require('../../../models/weather-arr-model')
 const apiWeather = require('../../api/weather-api');
 const dateFNS = require('date-fns');
-
+const uuidV4 = require('uuid');
 
 async function currentTravel(req, res, next) {
   const { uuid } = req.claims
@@ -30,6 +30,7 @@ async function currentTravel(req, res, next) {
     }
     const result = await apiWeather(city, apiRequest);
     result.user = uuid;
+    result.travelID = uuidV4()
     await weatherArrModel.create(result)
     return res.status(200).send(result)
   } catch (e) {

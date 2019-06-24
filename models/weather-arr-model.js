@@ -56,6 +56,7 @@ const weatherArrSchema = new Schema({
     date: String,
     weekday: String
   }],
+  travelID: String,
   user: String,
   createdAt: {
     type: Date,
@@ -65,6 +66,7 @@ const weatherArrSchema = new Schema({
     type: Boolean,
     default: true
   },
+
 })
 
 const WeatherArr = mongoose.model('WeatherArr', weatherArrSchema)
