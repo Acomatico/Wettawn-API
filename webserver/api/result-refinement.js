@@ -4,7 +4,6 @@ const dateFNS = require('date-fns')
 const clothesSelector = require('./clothes-selector');
 
 
-//TODO: Filter important things, maybe implement different filters
 function degreesToDir(deg) {
   if (deg > 337.5 || deg < 22.5) {
     return "N"
@@ -87,7 +86,7 @@ async function refineResult(rawData) {
       cloudiness: time.clouds.all,
       windSpeed: time.wind.speed,
       windDir: degreesToDir(time.wind.deg),
-      time: dateFNS.format(time.dt_txt, 'hh:mm'),
+      time: dateFNS.format(time.dt_txt, 'HH:mm'),
       clothes: undefined
     }
     if (time.rain) {
@@ -106,11 +105,10 @@ async function refineResult(rawData) {
         weekday: dateFNS.format(time.dt_txt, 'dddd')
       })
     }
-    // console.log(refinedData)
     refinedData.days[i - 1].weather.push(result)
   });
 
-  console.log(refinedData);
+  // console.log(refinedData);
   return refinedData;
 }
 

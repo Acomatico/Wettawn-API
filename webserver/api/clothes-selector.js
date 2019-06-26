@@ -2,7 +2,7 @@
 
 function select(temp, weather) {
   if (temp < 5 && temp > -10) {
-    if (weather == 'heavy rain') return 'oilskin'
+    if (weather == 'heavy rain') return 'raincoat'
     if (weather.includes('rain')) return 'rain-jacket';
     if (weather.includes('snow')) return 'snow-jacket';
     return 'jacket'
@@ -19,7 +19,7 @@ function select(temp, weather) {
     return 'light-clothes'
   }
   if (temp < 40) {
-    return 'light-clothes'
+    return 'hot-weather-clothes'
   }
 }
 
