@@ -9,7 +9,7 @@ async function searchCity(req, res, next) {
   const apiRequest = "weather";
   try {
 
-    const dbWeather = await weatherModel.findOne({ user: uuid, current: true })
+    const dbWeather = await weatherModel.findOne({ user: uuid, current: true, city: city })
     if (dbWeather) {
       const hours = dateFNS.differenceInHours(new Date(), dbWeather.createdAt)
       if (hours < 3) {
